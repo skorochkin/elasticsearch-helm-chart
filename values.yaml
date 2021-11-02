@@ -1,0 +1,49 @@
+# -- Name of elasticsearch cluster
+clusterName: "es"
+
+# -- Path to docker image
+image: docker.elastic.co/elasticsearch/elasticsearch
+# -- Image tag
+imageTag: 7.15.0
+# -- Image pull policy
+imagePullPolicy: "IfNotPresent"
+
+# -- How many replicas to start
+replicas: 3
+
+# -- PodDisruptionBudget maxUnavailable number
+maxUnavailable: 1
+
+# -- Value for "sysctl -w vm.max_map_count=.."
+sysctlVmMaxMapCount: 262144
+
+# -- Protocol used for Health checker
+protocol: http
+
+# -- HTTP port number
+httpPort: 9200
+
+# -- Transport port number
+transportPort: 9300
+
+# -- AntiAffinity topology key
+antiAffinityTopologyKey: kubernetes.io/hostname
+# -- AntiAffinity type (hard|soft)
+antiAffinity:	soft
+
+# -- Pod Management Policy. Setting in "Parallel: will speed up the deployment.
+podManagementPolicy: "Parallel"
+
+# -- RollingUpdate type
+updateStrategy: RollingUpdate
+
+# -- Ingress host
+ingressHost: example.local
+# -- Ingress path
+ingressPath: /
+
+# -- Elasticsearch netowrk.host parameter (on which interfaces it should listen)
+networkHost: "0.0.0.0"
+
+# -- Elasticsearch custom healthcheck parameter
+clusterHealthCheckParams: "wait_for_status=green&timeout=1s"

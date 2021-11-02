@@ -1,0 +1,10 @@
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: "{{ template "name" . }}-pdb"
+spec:
+  maxUnavailable: {{ default 1 .Values.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: "{{ template "name" . }}"
